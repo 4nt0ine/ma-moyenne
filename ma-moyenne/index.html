@@ -7,6 +7,8 @@
     <title>Ma moyenne</title>
     <!-- css -->
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
     <!-- Bootstrap 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -26,11 +28,115 @@
       integrity="sha256-R6eRO29lbCyPGfninb/kjIXeRjMOqY3VWPVk6gMhREk="
       crossorigin="anonymous"
     ></script>
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <!-- DOM to image -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+      integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA=="
+      crossorigin="anonymous"
+    ></script>
     <!-- js custom -->
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/app.js"></script>
   </head>
   <body>
     <!---------- partie evan ----------->
+
+    <!---------- partie Baptiste ----------->
+    <div class="form-moyenne">
+      <div class="div-form-note">
+        <form method="post" class="form-note">
+          <p class="js-nb-note"></p>
+
+          <label
+            >Note :
+            <input class="note" />
+          </label>
+          <p class="d-none error error-note">
+            Note invalide ( Saisir une note entre 0 et 20 )
+          </p>
+
+          <label class="coef"
+            >Coeficient :
+            <p class="result-coef">X</p>
+            <input
+              type="range"
+              min="0"
+              max="10"
+              step="0.5"
+              class="coef-range"
+              value="1"
+            />
+          </label>
+
+          <select class="mat">
+            <option value="">-- Choisissez une matière --</option>
+            <option value="Mathématiques">Mathématiques</option>
+            <option value="Francais">Francais</option>
+            <option value="Anglais">Anglais</option>
+            <option value="Histoire-Géographie">Histoire-Géographie</option>
+            <option value="Physique-Chimie">Physique-Chimie</option>
+            <option value="SVT">SVT</option>
+          </select>
+          <p class="d-none error error-mat">
+            Champ invalide ( Veuillez spécifier votre matière )
+          </p>
+
+          <label class="date"
+            >Date :
+            <input type="date" class="date-form" />
+            <p class="d-none error error-date">
+              Date non valide ( Veuillez spécifier une date )
+            </p>
+          </label>
+
+          <label class="d-none other-mat"
+            >Autre :
+            <input name="submitted-name" autocomplete="name" />
+          </label>
+        </form>
+
+        <div class="div-btn">
+          <button class="add-note btn">Ajouter</button>
+          <button class="return-btn btn">Retour</button>
+          <button class="val-btn btn">Valider</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-moy-and-ecart"></div>
+    <div class=""></div>
+
+    <div class="result-note">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Notes entrées</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="num-tab">
+            <td class="td-start">Numéro</td>
+          </tr>
+          <tr class="note-tab">
+            <td class="td-start">Note</td>
+          </tr>
+          <tr class="coef-tab">
+            <td class="td-start">Coefficient</td>
+          </tr>
+          <tr class="mat-tab">
+            <td class="td-start">Matière</td>
+          </tr>
+          <tr class="date-tab">
+            <td class="td-start">Date</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="result-graph">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
 
     <!---------- partie rodson ----------->
     <div class="bloc">
@@ -45,7 +151,6 @@
           Reste éveillé pas bon du tout ta moyenne, mais bosse encore .
         </p>
       </div>
-
       <div class="moyenne_10_13">
         <img
           class="tom border border-dark"
